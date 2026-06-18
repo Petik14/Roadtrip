@@ -1,0 +1,1798 @@
+<!doctype html>
+<html lang="cs">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Roadtrip Řecko</title>
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --card: #fff;
+            --text: #18202a;
+            --muted: #5a6675;
+            --line: #dce3ef;
+            --accent: #0b6fb3;
+            --accent2: #0f9d8a
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5
+        }
+
+        header {
+            background: linear-gradient(135deg, #0b6fb3, #0f9d8a);
+            color: white;
+            padding: 34px 18px 28px
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(28px, 4vw, 44px)
+        }
+
+        header p {
+            max-width: 900px;
+            margin: 8px 0 0;
+            color: rgba(255, 255, 255, .92)
+        }
+
+        .quick {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin: 18px 0 0
+        }
+
+        .quick div {
+            background: rgba(255, 255, 255, .16);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 14px;
+            padding: 12px
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            background: rgba(255, 255, 255, .94);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(8px)
+        }
+
+        nav .wrap {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 18px
+        }
+
+        nav a {
+            white-space: nowrap;
+            text-decoration: none;
+            color: var(--accent);
+            border: 1px solid var(--line);
+            background: white;
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 14px
+        }
+
+        main {
+            padding: 20px 18px 48px
+        }
+
+        .panel {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 18px
+        }
+
+        .panel h2 {
+            margin-top: 0
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px
+        }
+
+        .legend div {
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px
+        }
+
+        .route-line {
+            font-size: 14px;
+            color: var(--muted);
+            word-break: break-word
+        }
+
+        .section {
+            margin-top: 28px
+        }
+
+        .section h2 {
+            font-size: 26px;
+            margin: 0 0 14px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px;
+            margin: 14px 0;
+            box-shadow: 0 10px 25px rgba(18, 33, 58, .05)
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-start
+        }
+
+        .route-index {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em
+        }
+
+        h3 {
+            margin: 3px 0;
+            font-size: 24px
+        }
+
+        .country {
+            margin: 0;
+            color: var(--muted)
+        }
+
+        .priority {
+            white-space: nowrap;
+            font-size: 20px;
+            background: #f0f8ff;
+            border: 1px solid #cbe7ff;
+            border-radius: 999px;
+            padding: 6px 10px
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0
+        }
+
+        .meta span {
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .note {
+            color: #344154;
+            background: #fff9ef;
+            border-left: 4px solid #f0b35c;
+            padding: 10px 12px;
+            border-radius: 10px
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: var(--accent);
+            padding: 8px 11px;
+            border-radius: 10px;
+            font-weight: 650;
+            font-size: 14px
+        }
+
+        .btn:hover {
+            filter: brightness(.94)
+        }
+
+        .btn.official {
+            background: var(--accent2)
+        }
+
+        .buttons.small .btn {
+            font-size: 13px;
+            padding: 6px 9px;
+            border-radius: 9px
+        }
+
+        .bonus {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--line)
+        }
+
+        .bonus h4 {
+            margin: 0 0 10px
+        }
+
+        .bonus-item {
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 12px;
+            margin-top: 10px
+        }
+
+        .bonus-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: baseline
+        }
+
+        .bonus-top span {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .bonus-item p {
+            margin: 8px 0 0
+        }
+
+        .todo {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .todo li {
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin: 8px 0
+        }
+
+        footer {
+            color: var(--muted);
+            font-size: 13px;
+            border-top: 1px solid var(--line);
+            padding-top: 18px;
+            margin-top: 28px
+        }
+
+        @media(max-width:800px) {
+
+            .quick,
+            .legend {
+                grid-template-columns: 1fr
+            }
+
+            .card-header {
+                flex-direction: column
+            }
+
+            .bonus-top {
+                flex-direction: column;
+                gap: 4px
+            }
+        }
+
+        @media print {
+
+            nav,
+            .buttons {
+                display: none
+            }
+
+            body {
+                background: #fff
+            }
+
+            .card {
+                box-shadow: none;
+                page-break-inside: avoid
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <h1>Roadtrip Řecko</h1>
+            <p>Pracovní přehled míst v pořadí trasy: co je jen průjezd, kde má smysl zastavit, co hledat na obrázcích a
+                jaké bonusové památky/pláže/muzea přidat podle času.</p>
+            <div class="quick">
+                <div><strong>⭐⭐⭐</strong><br>Hlavní místa.</div>
+                <div><strong>⭐⭐</strong><br>Dobré zastávky.</div>
+                <div><strong>⭐</strong><br>Průjezd/volitelné.</div>
+                <div><strong>Tip</strong><br>Každý den vybrat 1–3 hlavní věci.</div>
+            </div>
+             <div style="margin-top: 20px; color:red; height: auto; width: 100%; background-color: lightblue; text-align: center;font-weight: bold;">Odkaz na celou trasu: <a href="https://mapy.com/s/fosafusoga">Kompletní mapa</a></div>
+        </div>
+    </header>
+    <nav>
+        <div class="wrap"><a href="#Srbsko+%E2%86%92+Severn%C3%AD+Makedonie+%E2%86%92+%C5%98ecko">Srbsko → Severní
+                Makedonie → Řecko</a><a href="#Solu%C5%88+a+vstup+na+Chalkidiki">Soluň a vstup na Chalkidiki</a><a
+                href="#Sithonia+%E2%80%93+hlavn%C3%AD+%C5%99eck%C3%A1+%C4%8D%C3%A1st">Sithonia – hlavní řecká část</a><a
+                href="#N%C3%A1vrat+mimo+Solu%C5%88+%E2%80%93+v%C3%BDchodn%C3%AD+Chalkidiki">Návrat mimo Soluň – východní
+                Chalkidiki</a><a href="#Bulharsko+%E2%86%92+Srbsko">Bulharsko → Srbsko</a></div>
+    </nav>
+    <main class="wrap">
+        <div class="panel">
+            <h2>Rychlé použití</h2>
+            <div class="legend">
+                <div><strong>Mapy.cz</strong><br>Otevře místo v mapách pro navigaci.</div>
+                <div><strong>Obrázky</strong><br>Rychle ukáže, jak místo vypadá.</div>
+                <div><strong>Oficiální</strong><br>Turistické/oficiální stránky, kde dávají smysl.</div>
+            </div>
+        </div>
+        <div class="panel">
+            <h2>Trasa od Niše</h2>
+            <p class="route-line">Niš → Preševo → Skopje → Gevgelija → Evzonoi → Soluň / Thessaloniki → Nea Moudania →
+                Nikiti → Neos Marmaras → Toroni → Porto Koufo → Kalamitsi → Sarti → Kavourotrypes / Orange Beach →
+                Armenistis → Platanitsi Beach → Vourvourou → Karidi Beach → Ormos Panagias → Pyrgadikia → Ierissos →
+                Stratoni → Olympiada → Stavros → Asprovalta → Lion of Amphipolis → Promachonas / Kulata border crossing
+                → Sofia → Niš</p>
+        </div>
+        <div class="panel">
+            <h2>Co bych osobně nevynechal</h2>
+            <ul class="todo">
+                <li><strong>Niš:</strong> Niš Fortress nebo Skull Tower.</li>
+                <li><strong>Thessaloniki:</strong> White Tower + waterfront + večerní jídlo/bary.</li>
+                <li><strong>Sithonia:</strong> Neos Marmaras, Porto Koufo, Sarti, Kavourotrypes/Orange Beach,
+                    Vourvourou, Karidi Beach.</li>
+                <li><strong>Návrat mimo Soluň:</strong> Pyrgadikia, Olympiada/Ancient Stagira, Lion of Amphipolis.</li>
+                <li><strong>Sofia:</strong> Alexander Nevsky + Serdica + Vitosha Boulevard.</li>
+            </ul>
+        </div>
+        <section id="Srbsko+%E2%86%92+Severn%C3%AD+Makedonie+%E2%86%92+%C5%98ecko" class="section">
+            <h2>Srbsko → Severní Makedonie → Řecko</h2>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 1</div>
+                        <h3>Niš</h3>
+                        <p class="country">Srbsko · město / nocleh / historie</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: nocleh / 1–3 h</span><span>město / nocleh / historie</span></div>
+                <p><strong>Proč tam jet:</strong> Praktický bod na trase a zároveň město, kde se dá vidět pevnost,
+                    historické památky a dát rozumný nocleh před nebo po dlouhém přejezdu.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobré místo, kde nespát jen u dálnice. Pokud bude čas, stojí
+                    za krátké centrum.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Ni%C5%A1+Srbsko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Ni%C5%A1+Srbsko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn" href="https://www.google.com/search?q=Ni%C5%A1+Srbsko"
+                        target="_blank" rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Ni%C5%A1+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://visitnis.org/en/" target="_blank" rel="noopener">Oficiální 1</a><a
+                        class="btn official" href="https://www.serbia.travel/en/nis-fortress/" target="_blank"
+                        rel="noopener">Oficiální 2</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Niš Fortress</strong><span>⭐⭐⭐ · 30–60 min · pevnost</span></div>
+                        <p>Pevnost v centru města, dobrá na krátkou procházku a fotky.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Ni%C5%A1+Fortress+Srbsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Ni%C5%A1+Fortress+Srbsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Ni%C5%A1+Fortress+Srbsko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Ni%C5%A1+Fortress+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Skull Tower / Ćele Kula Niš</strong><span>⭐⭐ · 30–45 min ·
+                                historie</span></div>
+                        <p>Silná historická památka; není veselá, ale je známá a unikátní.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Skull+Tower+%2F+%C4%86ele+Kula+Ni%C5%A1+Srbsko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Skull+Tower+%2F+%C4%86ele+Kula+Ni%C5%A1+Srbsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Skull+Tower+%2F+%C4%86ele+Kula+Ni%C5%A1+Srbsko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Skull+Tower+%2F+%C4%86ele+Kula+Ni%C5%A1+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Mediana Niš</strong><span>⭐⭐ · 45–90 min · archeologie</span>
+                        </div>
+                        <p>Archeologické místo spojené s římskou dobou a Konstantinem Velikým.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Mediana+Ni%C5%A1+Srbsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Mediana+Ni%C5%A1+Srbsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Mediana+Ni%C5%A1+Srbsko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Mediana+Ni%C5%A1+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Bubanj Memorial Park Niš</strong><span>⭐ · 30–45 min ·
+                                památník</span></div>
+                        <p>Pamětní místo z 2. světové války; spíš pro zájemce o historii.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Bubanj+Memorial+Park+Ni%C5%A1+Srbsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Bubanj+Memorial+Park+Ni%C5%A1+Srbsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Bubanj+Memorial+Park+Ni%C5%A1+Srbsko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Bubanj+Memorial+Park+Ni%C5%A1+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 2</div>
+                        <h3>Preševo</h3>
+                        <p class="country">Srbsko · průjezd / hranice</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: jen průjezd</span><span>průjezd / hranice</span></div>
+                <p><strong>Proč tam jet:</strong> Orientační bod před hranicí se Severní Makedonií.</p>
+                <p class="note"><strong>Poznámka:</strong> Spíš palivo/WC podle situace, ne turistický cíl.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Pre%C5%A1evo+Srbsko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Pre%C5%A1evo+Srbsko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Pre%C5%A1evo+Srbsko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Pre%C5%A1evo+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 3</div>
+                        <h3>Skopje</h3>
+                        <p class="country">Severní Makedonie · město / kultura / pauza</p>
+                    </div>
+                    <div class="priority">⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–3 h podle času</span><span>město / kultura / pauza</span></div>
+                <p><strong>Proč tam jet:</strong> Hlavní město Severní Makedonie. Dá se tu udělat městská pauza, jídlo a
+                    krátká procházka centrem.</p>
+                <p class="note"><strong>Poznámka:</strong> Na cestě tam bych to nepřeháněl, ale je to zajímavější pauza
+                    než benzinka.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Skopje+Severn%C3%AD+Makedonie"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Skopje+Severn%C3%AD+Makedonie"
+                        target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Skopje+Severn%C3%AD+Makedonie" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Skopje+Severn%C3%AD+Makedonie&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://skopje.gov.mk/en_us/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Stone Bridge Skopje</strong><span>⭐⭐ · 15–30 min · památka</span>
+                        </div>
+                        <p>Symbol města, spojuje modernější centrum se starou částí.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Stone+Bridge+Skopje+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Stone+Bridge+Skopje+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Stone+Bridge+Skopje+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Stone+Bridge+Skopje+Severn%C3%AD+Makedonie&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Old Bazaar Skopje</strong><span>⭐⭐⭐ · 45–90 min · město</span>
+                        </div>
+                        <p>Starý bazar, jídlo, atmosféra, uličky.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Old+Bazaar+Skopje+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Old+Bazaar+Skopje+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Old+Bazaar+Skopje+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Old+Bazaar+Skopje+Severn%C3%AD+Makedonie&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Skopje Fortress Kale</strong><span>⭐⭐ · 30–60 min ·
+                                pevnost</span></div>
+                        <p>Pevnost nad městem, výhled a krátká historická zastávka.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Skopje+Fortress+Kale+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Skopje+Fortress+Kale+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Skopje+Fortress+Kale+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Skopje+Fortress+Kale+Severn%C3%AD+Makedonie&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Matka Canyon</strong><span>⭐⭐⭐ · 2–4 h · příroda / detour</span>
+                        </div>
+                        <p>Krásný přírodní detour mimo centrum; jen když chcete přidat čas.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Matka+Canyon+Severn%C3%AD+Makedonie" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Matka+Canyon+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Matka+Canyon+Severn%C3%AD+Makedonie"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Matka+Canyon+Severn%C3%AD+Makedonie&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 4</div>
+                        <h3>Gevgelija</h3>
+                        <p class="country">Severní Makedonie · průjezd / hranice</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: jen průjezd</span><span>průjezd / hranice</span></div>
+                <p><strong>Proč tam jet:</strong> Poslední větší místo před řeckou hranicí. Praktické pro tankování nebo
+                    krátkou pauzu.</p>
+                <p class="note"><strong>Poznámka:</strong> Turisticky bych tady čas neplánoval.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Gevgelija+Severn%C3%AD+Makedonie"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Gevgelija+Severn%C3%AD+Makedonie"
+                        target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Gevgelija+Severn%C3%AD+Makedonie" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Gevgelija+Severn%C3%AD+Makedonie&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 5</div>
+                        <h3>Evzonoi</h3>
+                        <p class="country">Řecko · hraniční přechod</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: podle fronty</span><span>hraniční přechod</span></div>
+                <p><strong>Proč tam jet:</strong> Vjezd do Řecka. Technický bod trasy.</p>
+                <p class="note"><strong>Poznámka:</strong> Po hranici začíná řecká část roadtripu.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Evzonoi+%C5%98ecko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Evzonoi+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Evzonoi+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Evzonoi+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a></div>
+            </article>
+        </section>
+        <section id="Solu%C5%88+a+vstup+na+Chalkidiki" class="section">
+            <h2>Soluň a vstup na Chalkidiki</h2>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 6</div>
+                        <h3>Soluň / Thessaloniki</h3>
+                        <p class="country">Řecko · město / jídlo / bary / památky</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: večer / 2–6 h / případně noc</span><span>město / jídlo / bary /
+                        památky</span></div>
+                <p><strong>Proč tam jet:</strong> Největší město severního Řecka. Skvělé na řecký večer, promenádu,
+                    jídlo, bary a kulturu.</p>
+                <p class="note"><strong>Poznámka:</strong> Když chcete jednu městskou/párty noc, tady to dává největší
+                    smysl.</p>
+                <div class="buttons"><a class="btn"
+                        href="https://mapy.cz/zakladni?q=Solu%C5%88+%2F+Thessaloniki+%C5%98ecko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Solu%C5%88+%2F+Thessaloniki+%C5%98ecko"
+                        target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Solu%C5%88+%2F+Thessaloniki+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Solu%C5%88+%2F+Thessaloniki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.thessalonikitourism.gr/index.php/en/" target="_blank" rel="noopener">Oficiální
+                        1</a><a class="btn official"
+                        href="https://www.thessalonikitourism.gr/index.php/en/component/k2/item/143-white-tower-of-thessaloniki"
+                        target="_blank" rel="noopener">Oficiální 2</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>White Tower Thessaloniki</strong><span>⭐⭐⭐ · 30–60 min · památka
+                                / muzeum</span></div>
+                        <p>Nejznámější symbol města u nábřeží.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=White+Tower+Thessaloniki+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=White+Tower+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=White+Tower+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=White+Tower+Thessaloniki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Thessaloniki Waterfront</strong><span>⭐⭐⭐ · 45–90 min ·
+                                procházka</span></div>
+                        <p>Promenáda u moře, ideální večer.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Thessaloniki+Waterfront+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Thessaloniki+Waterfront+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Thessaloniki+Waterfront+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Thessaloniki+Waterfront+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Aristotelous Square</strong><span>⭐⭐ · 20–45 min · město</span>
+                        </div>
+                        <p>Hlavní náměstí, kavárny, centrum dění.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Aristotelous+Square+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Aristotelous+Square+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Aristotelous+Square+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Aristotelous+Square+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Rotunda Thessaloniki</strong><span>⭐⭐ · 30–60 min ·
+                                památka</span></div>
+                        <p>Výrazná římsko-byzantská památka.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Rotunda+Thessaloniki+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Rotunda+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Rotunda+Thessaloniki+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Rotunda+Thessaloniki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Arch of Galerius Thessaloniki</strong><span>⭐⭐ · 10–20 min ·
+                                památka</span></div>
+                        <p>Rychlá zastávka u římské památky.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Arch+of+Galerius+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Arch+of+Galerius+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Arch+of+Galerius+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Arch+of+Galerius+Thessaloniki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Ano Poli Thessaloniki</strong><span>⭐⭐ · 1–2 h · výhled /
+                                město</span></div>
+                        <p>Horní město, výhledy, starší atmosféra.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Ano+Poli+Thessaloniki+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Ano+Poli+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Ano+Poli+Thessaloniki+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Ano+Poli+Thessaloniki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Archaeological Museum of Thessaloniki</strong><span>⭐⭐ · 1–2 h ·
+                                muzeum</span></div>
+                        <p>Muzeum pro historii Makedonie a antiky.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Archaeological+Museum+of+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Archaeological+Museum+of+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Archaeological+Museum+of+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Archaeological+Museum+of+Thessaloniki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Museum of Byzantine Culture Thessaloniki</strong><span>⭐⭐ · 1–2 h
+                                · muzeum</span></div>
+                        <p>Muzeum byzantské kultury; dobré při horším počasí.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Museum+of+Byzantine+Culture+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Museum+of+Byzantine+Culture+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Museum+of+Byzantine+Culture+Thessaloniki+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Museum+of+Byzantine+Culture+Thessaloniki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 7</div>
+                        <h3>Nea Moudania</h3>
+                        <p class="country">Řecko · průjezd / nákup zásob</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: 30–60 min podle potřeby</span><span>průjezd / nákup zásob</span></div>
+                <p><strong>Proč tam jet:</strong> Praktický vstup na Chalkidiki. Spíš nákup, benzín, jídlo než hlavní
+                    cíl.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobré místo doplnit zásoby před Sithonií.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Nea+Moudania+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Nea+Moudania+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Nea+Moudania+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Nea+Moudania+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a></div>
+            </article>
+        </section>
+        <section id="Sithonia+%E2%80%93+hlavn%C3%AD+%C5%99eck%C3%A1+%C4%8D%C3%A1st" class="section">
+            <h2>Sithonia – hlavní řecká část</h2>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 8</div>
+                        <h3>Nikiti</h3>
+                        <p class="country">Řecko · základna / promenáda / zásoby</p>
+                    </div>
+                    <div class="priority">⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–3 h / nocleh</span><span>základna / promenáda / zásoby</span></div>
+                <p><strong>Proč tam jet:</strong> Praktický začátek Sithonie. Dá se tu spát, najíst, nakoupit a pak
+                    vyrážet dál po poloostrově.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobré místo na první noc na Sithonii, pokud přijedete večer.
+                </p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Nikiti+%C5%98ecko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Nikiti+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Nikiti+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Nikiti+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Nikiti Old Village</strong><span>⭐⭐ · 30–60 min · vesnice</span>
+                        </div>
+                        <p>Starší část Nikiti mimo hlavní plážovou zónu; klidnější procházka.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Nikiti+Old+Village+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Nikiti+Old+Village+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Nikiti+Old+Village+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Nikiti+Old+Village+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Nikiti Beach</strong><span>⭐ · 30–90 min · pláž</span></div>
+                        <p>Jednoduchá městská pláž a promenáda.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Nikiti+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Nikiti+Beach+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Nikiti+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Nikiti+Beach+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Lagomandra Beach</strong><span>⭐⭐ · 1–2 h · pláž</span></div>
+                        <p>Hezká pláž mezi Nikiti a Neos Marmaras; stojí za možné přidání.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Lagomandra+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Lagomandra+Beach+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Lagomandra+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Lagomandra+Beach+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 9</div>
+                        <h3>Neos Marmaras</h3>
+                        <p class="country">Řecko · živější městečko / večer</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: večer / nocleh</span><span>živější městečko / večer</span></div>
+                <p><strong>Proč tam jet:</strong> Jedno z živějších míst na Sithonii. Dobré na večeři, bary, procházku a
+                    trochu noční atmosféry.</p>
+                <p class="note"><strong>Poznámka:</strong> Lepší na večer než úplně klidná místa typu Vourvourou.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Neos+Marmaras+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Neos+Marmaras+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Neos+Marmaras+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Neos+Marmaras+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Parthenonas Sithonia</strong><span>⭐⭐⭐ · 1–2 h · vesnice /
+                                výhled</span></div>
+                        <p>Tradiční vesnice nad Neos Marmaras, výhledy a klid.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Parthenonas+Sithonia+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Parthenonas+Sithonia+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Parthenonas+Sithonia+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Parthenonas+Sithonia+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Porto Carras</strong><span>⭐ · podle zájmu · resort / víno</span>
+                        </div>
+                        <p>Známý resort a vinařská oblast u Neos Marmaras.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Porto+Carras+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Porto+Carras+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Porto+Carras+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Porto+Carras+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 10</div>
+                        <h3>Toroni</h3>
+                        <p class="country">Řecko · pláž / klidnější pobřeží</p>
+                    </div>
+                    <div class="priority">⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–2 h</span><span>pláž / klidnější pobřeží</span></div>
+                <p><strong>Proč tam jet:</strong> Pobřežní zastávka na západní straně Sithonie. Klidnější koupání cestou
+                    na jih.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobré nezdržet se příliš, pokud chcete stihnout Porto Koufo a
+                    Kalamitsi.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Toroni+%C5%98ecko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Toroni+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Toroni+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Toroni+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Likithos Castle Toroni</strong><span>⭐ · 20–40 min · ruiny</span>
+                        </div>
+                        <p>Zbytky staršího opevnění u pobřeží; krátká fotopauza.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Likithos+Castle+Toroni+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Likithos+Castle+Toroni+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Likithos+Castle+Toroni+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Likithos+Castle+Toroni+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Ancient Toroni</strong><span>⭐ · 20–45 min · archeologie</span>
+                        </div>
+                        <p>Archeologická oblast pro zájemce o historii.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Ancient+Toroni+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Ancient+Toroni+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Ancient+Toroni+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Ancient+Toroni+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 11</div>
+                        <h3>Porto Koufo</h3>
+                        <p class="country">Řecko · přírodní záliv / jídlo / fotky</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 45–120 min</span><span>přírodní záliv / jídlo / fotky</span></div>
+                <p><strong>Proč tam jet:</strong> Velmi pěkný chráněný záliv. Dobrá pauza na jídlo, výhledy a fotky.</p>
+                <p class="note"><strong>Poznámka:</strong> Místo působí jinak než klasické otevřené pláže.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Porto+Koufo+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Porto+Koufo+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Porto+Koufo+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Porto+Koufo+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 12</div>
+                        <h3>Kalamitsi</h3>
+                        <p class="country">Řecko · pláž / jih Sithonie</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–3 h</span><span>pláž / jih Sithonie</span></div>
+                <p><strong>Proč tam jet:</strong> Hezká pláž na jihovýchodní části Sithonie. Dobrá na delší koupací
+                    zastávku.</p>
+                <p class="note"><strong>Poznámka:</strong> Spíš plážový bod než město.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Kalamitsi+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Kalamitsi+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Kalamitsi+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Kalamitsi+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Thalatta Kalamitsi</strong><span>⭐ · podle zájmu · pláž /
+                                kemp</span></div>
+                        <p>Známý kemp a plážová oblast.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Thalatta+Kalamitsi+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Thalatta+Kalamitsi+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Thalatta+Kalamitsi+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Thalatta+Kalamitsi+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 13</div>
+                        <h3>Sarti</h3>
+                        <p class="country">Řecko · pláž / městečko / večer</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: večer / nocleh / 2–4 h</span><span>pláž / městečko / večer</span></div>
+                <p><strong>Proč tam jet:</strong> Výrazné místo na východní straně Sithonie. Velká pláž, restaurace,
+                    obchody a výhled směrem k Athosu.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobré na nocleh po jihu Sithonie.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Sarti+%C5%98ecko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Sarti+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn" href="https://www.google.com/search?q=Sarti+%C5%98ecko"
+                        target="_blank" rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Sarti+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Sarti Beach</strong><span>⭐⭐ · 1–2 h · pláž</span></div>
+                        <p>Velká městská pláž s výhledem směrem na Athos.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Sarti+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Sarti+Beach+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Sarti+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Sarti+Beach+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Achlada Beach Sarti</strong><span>⭐ · 30–90 min · pláž</span>
+                        </div>
+                        <p>Menší pláž poblíž Sarti.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Achlada+Beach+Sarti+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Achlada+Beach+Sarti+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Achlada+Beach+Sarti+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Achlada+Beach+Sarti+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 14</div>
+                        <h3>Kavourotrypes / Orange Beach</h3>
+                        <p class="country">Řecko · ikonická pláž / skály / fotky</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 2–4 h</span><span>ikonická pláž / skály / fotky</span></div>
+                <p><strong>Proč tam jet:</strong> Jedno z nejfotogeničtějších míst na Sithonii. Tyrkysová voda, skály,
+                    malé zátoky.</p>
+                <p class="note"><strong>Poznámka:</strong> Přijet radši dřív. V sezoně může být hodně lidí a parkování
+                    horší.</p>
+                <div class="buttons"><a class="btn"
+                        href="https://mapy.cz/zakladni?q=Kavourotrypes+%2F+Orange+Beach+%C5%98ecko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Kavourotrypes+%2F+Orange+Beach+%C5%98ecko"
+                        target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Kavourotrypes+%2F+Orange+Beach+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Kavourotrypes+%2F+Orange+Beach+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://nikana.gr/en/tourist-guide/sithonia/beaches/1813/orange-beach-kavourotripes"
+                        target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Paradise Beach Kavourotrypes</strong><span>⭐⭐ · 30–90 min ·
+                                pláž</span></div>
+                        <p>Další malá plážová část v okolí Kavourotrypes.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Paradise+Beach+Kavourotrypes+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Paradise+Beach+Kavourotrypes+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Paradise+Beach+Kavourotrypes+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Paradise+Beach+Kavourotrypes+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 15</div>
+                        <h3>Armenistis</h3>
+                        <p class="country">Řecko · pláž / kemp / koupání</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–3 h</span><span>pláž / kemp / koupání</span></div>
+                <p><strong>Proč tam jet:</strong> Známá plážová/kempová oblast. Dobré na koupání a odpočinek mezi Sarti
+                    a Vourvourou.</p>
+                <p class="note"><strong>Poznámka:</strong> Hodí se jako delší pauza, pokud nebude přecpaná.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Armenistis+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Armenistis+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Armenistis+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Armenistis+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 16</div>
+                        <h3>Platanitsi Beach</h3>
+                        <p class="country">Řecko · volitelná pláž</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: 30–90 min</span><span>volitelná pláž</span></div>
+                <p><strong>Proč tam jet:</strong> Volitelná pláž u Sarti. Dobrá, pokud bude čas nebo se vám nebude líbit
+                    jinde.</p>
+                <p class="note"><strong>Poznámka:</strong> Není nutné ji tlačit do plánu, pokud už budete mít
+                    Kavourotrypes/Armenistis.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Platanitsi+Beach+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Platanitsi+Beach+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Platanitsi+Beach+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Platanitsi+Beach+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 17</div>
+                        <h3>Vourvourou</h3>
+                        <p class="country">Řecko · zátoky / klid / loďka</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: půlden / nocleh</span><span>zátoky / klid / loďka</span></div>
+                <p><strong>Proč tam jet:</strong> Klidnější oblast se zátokami, ostrůvky a tyrkysovou vodou. Dobré místo
+                    na pomalejší závěr Sithonie.</p>
+                <p class="note"><strong>Poznámka:</strong> Tady bych neplánoval party, spíš odpočinek, moře a případně
+                    loďku.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Vourvourou+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Vourvourou+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Vourvourou+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Vourvourou+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://sithoniagreece.com/halkidiki/explore/beaches/" target="_blank"
+                        rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Diaporos Island</strong><span>⭐⭐⭐ · 2–4 h · loď / ostrov</span>
+                        </div>
+                        <p>Ostrůvek u Vourvourou; zajímavý hlavně lodí/člunem, ne autem.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Diaporos+Island+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Diaporos+Island+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Diaporos+Island+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Diaporos+Island+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Blue Lagoon Diaporos</strong><span>⭐⭐ · součást výletu · loď /
+                                koupání</span></div>
+                        <p>Častý cíl lodních výletů v oblasti Vourvourou.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Blue+Lagoon+Diaporos+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Blue+Lagoon+Diaporos+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Blue+Lagoon+Diaporos+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Blue+Lagoon+Diaporos+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 18</div>
+                        <h3>Karidi Beach</h3>
+                        <p class="country">Řecko · pláž / mělká voda / fotky</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–3 h</span><span>pláž / mělká voda / fotky</span></div>
+                <p><strong>Proč tam jet:</strong> Jedna z nejhezčích pláží u Vourvourou. Mělká voda, světlý písek,
+                    zátoka.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobré pro klidnější koupání, ale v sezoně bývá plnější.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Karidi+Beach+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Karidi+Beach+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Karidi+Beach+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Karidi+Beach+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální 1</a><a
+                        class="btn official" href="https://www.krotiriresort.gr/en/chalkidiki-beaches-karidi/"
+                        target="_blank" rel="noopener">Oficiální 2</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 19</div>
+                        <h3>Ormos Panagias</h3>
+                        <p class="country">Řecko · přístav / start návratu / lodě</p>
+                    </div>
+                    <div class="priority">⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–2 h / nocleh</span><span>přístav / start návratu / lodě</span></div>
+                <p><strong>Proč tam jet:</strong> Přístavní místo, dobrý konec Sithonie a start návratu mimo Soluň přes
+                    Pyrgadikii.</p>
+                <p class="note"><strong>Poznámka:</strong> Dá se odsud řešit loď/výlet, případně poslední klidnější noc.
+                </p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Ormos+Panagias+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Ormos+Panagias+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Ormos+Panagias+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Ormos+Panagias+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Boat cruise to Mount Athos Ormos Panagias</strong><span>⭐⭐ ·
+                                půlden · loď / výlet</span></div>
+                        <p>Výlet lodí k Athosu; auto tam nemůže, ale lodí se dá vidět pobřeží.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Boat+cruise+to+Mount+Athos+Ormos+Panagias+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Boat+cruise+to+Mount+Athos+Ormos+Panagias+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Boat+cruise+to+Mount+Athos+Ormos+Panagias+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Boat+cruise+to+Mount+Athos+Ormos+Panagias+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Trani Ammouda Beach</strong><span>⭐⭐ · 1–2 h · pláž</span></div>
+                        <p>Velká pláž blízko Ormos Panagias.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Trani+Ammouda+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Trani+Ammouda+Beach+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Trani+Ammouda+Beach+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Trani+Ammouda+Beach+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section id="N%C3%A1vrat+mimo+Solu%C5%88+%E2%80%93+v%C3%BDchodn%C3%AD+Chalkidiki" class="section">
+            <h2>Návrat mimo Soluň – východní Chalkidiki</h2>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 20</div>
+                        <h3>Pyrgadikia</h3>
+                        <p class="country">Řecko · přímořská vesnice / výhledy</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 45–90 min</span><span>přímořská vesnice / výhledy</span></div>
+                <p><strong>Proč tam jet:</strong> Malá přímořská vesnice s hezkou atmosférou a výhledy. Ideální první
+                    zastávka při návratu mimo Soluň.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobré na kafe, oběd nebo krátkou procházku.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Pyrgadikia+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Pyrgadikia+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Pyrgadikia+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Pyrgadikia+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://visit-centralmacedonia.gr/en/where-to-go/61/1-halkidiki/361/pyrgadikia"
+                        target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 21</div>
+                        <h3>Ierissos</h3>
+                        <p class="country">Řecko · pobřežní město / průjezd</p>
+                    </div>
+                    <div class="priority">⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 30–90 min</span><span>pobřežní město / průjezd</span></div>
+                <p><strong>Proč tam jet:</strong> Pobřežní město blízko Athosu. Spíš pauza a průjezd než hlavní cíl.</p>
+                <p class="note"><strong>Poznámka:</strong> Dává smysl, když chcete vidět jinou část Chalkidiki než
+                    Sithonii.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Ierissos+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Ierissos+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Ierissos+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Ierissos+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Akanthos Ancient City Ierissos</strong><span>⭐ · 30–60 min ·
+                                archeologie</span></div>
+                        <p>Archeologický bod u Ierissosu pro zájemce o historii.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Akanthos+Ancient+City+Ierissos+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Akanthos+Ancient+City+Ierissos+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Akanthos+Ancient+City+Ierissos+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Akanthos+Ancient+City+Ierissos+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 22</div>
+                        <h3>Stratoni</h3>
+                        <p class="country">Řecko · menší pobřežní místo</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: průjezd / 20–40 min</span><span>menší pobřežní místo</span></div>
+                <p><strong>Proč tam jet:</strong> Menší zastávka na pobřeží východní Chalkidiki. Není nutnost, ale hezky
+                    rozbije cestu.</p>
+                <p class="note"><strong>Poznámka:</strong> Když budete ve skluzu, klidně projet.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Stratoni+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Stratoni+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Stratoni+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Stratoni+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/" target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 23</div>
+                        <h3>Olympiada</h3>
+                        <p class="country">Řecko · vesnice / Aristoteles / příroda</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–3 h</span><span>vesnice / Aristoteles / příroda</span></div>
+                <p><strong>Proč tam jet:</strong> Důležitější zastávka na návratu. Dá se spojit s Ancient Stagira,
+                    Aristotelovou trasou nebo Aristotle Parkem.</p>
+                <p class="note"><strong>Poznámka:</strong> Tady bych se zastavil radši než ve Stratoni.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Olympiada+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Olympiada+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Olympiada+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Olympiada+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/portfolio-view/olympiada-village/" target="_blank"
+                        rel="noopener">Oficiální 1</a><a class="btn official"
+                        href="https://www.visit-halkidiki.gr/portfolio-view/aristotles-park/" target="_blank"
+                        rel="noopener">Oficiální 2</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Ancient Stagira</strong><span>⭐⭐⭐ · 1–2 h · archeologie /
+                                výhled</span></div>
+                        <p>Rodiště Aristotela; archeologická a vyhlídková zastávka.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Ancient+Stagira+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Ancient+Stagira+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Ancient+Stagira+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Ancient+Stagira+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Aristotle Park Stagira</strong><span>⭐⭐ · 1–2 h · park /
+                                věda</span></div>
+                        <p>Tematický park s jednoduchými fyzikálními experimenty a výhledy.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Aristotle+Park+Stagira+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Aristotle+Park+Stagira+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Aristotle+Park+Stagira+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Aristotle+Park+Stagira+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Varvara Waterfalls Halkidiki</strong><span>⭐⭐ · 1–2 h + detour ·
+                                příroda</span></div>
+                        <p>Přírodní detour v oblasti, vhodné jen pokud chcete víc zeleně a máte čas.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Varvara+Waterfalls+Halkidiki+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Varvara+Waterfalls+Halkidiki+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Varvara+Waterfalls+Halkidiki+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Varvara+Waterfalls+Halkidiki+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 24</div>
+                        <h3>Stavros</h3>
+                        <p class="country">Řecko · plážové město / pauza</p>
+                    </div>
+                    <div class="priority">⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–2 h / možný nocleh</span><span>plážové město / pauza</span></div>
+                <p><strong>Proč tam jet:</strong> Pobřežní město vhodné na jídlo, kafe, koupání nebo nocleh před dlouhou
+                    cestou na sever.</p>
+                <p class="note"><strong>Poznámka:</strong> Dobrá volba, pokud nechcete den 7 hnát až do Niše.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Stavros+%C5%98ecko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Stavros+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Stavros+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Stavros+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://visit-centralmacedonia.gr/en/" target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 25</div>
+                        <h3>Asprovalta</h3>
+                        <p class="country">Řecko · pláž / nocleh / pauza</p>
+                    </div>
+                    <div class="priority">⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 1–2 h / možný nocleh</span><span>pláž / nocleh / pauza</span></div>
+                <p><strong>Proč tam jet:</strong> Plážové letovisko u Strymonského zálivu. Praktická poslední mořská
+                    pauza před návratem do vnitrozemí.</p>
+                <p class="note"><strong>Poznámka:</strong> Když budete unavení, tady nebo ve Stavrosu bych radši spal
+                    než jet na sílu.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Asprovalta+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Asprovalta+%C5%98ecko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Asprovalta+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Asprovalta+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://visit-centralmacedonia.gr/en/" target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 26</div>
+                        <h3>Lion of Amphipolis</h3>
+                        <p class="country">Řecko · rychlá historická zastávka</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 15–30 min</span><span>rychlá historická zastávka</span></div>
+                <p><strong>Proč tam jet:</strong> Výrazná historická památka skoro po cestě. Ideální krátká zastávka na
+                    fotku a protažení.</p>
+                <p class="note"><strong>Poznámka:</strong> Nezabere moc času, ale dá cestě smysl.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Lion+of+Amphipolis+%C5%98ecko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Lion+of+Amphipolis+%C5%98ecko"
+                        target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Lion+of+Amphipolis+%C5%98ecko" target="_blank"
+                        rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Lion+of+Amphipolis+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visit-centralmacedonia.gr/en/what-to-do/65/culture/archaeological-sites/56/leon-of-amphipolis"
+                        target="_blank" rel="noopener">Oficiální</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Archaeological Museum of Amphipolis</strong><span>⭐⭐ · 1–2 h ·
+                                muzeum</span></div>
+                        <p>Muzeum k antickému Amphipolisu; přidat jen pokud máte čas a chuť na historii.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Archaeological+Museum+of+Amphipolis+%C5%98ecko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Archaeological+Museum+of+Amphipolis+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Archaeological+Museum+of+Amphipolis+%C5%98ecko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Archaeological+Museum+of+Amphipolis+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Ancient Amphipolis</strong><span>⭐⭐ · 45–90 min ·
+                                archeologie</span></div>
+                        <p>Archeologické naleziště poblíž Lva.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Ancient+Amphipolis+%C5%98ecko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Ancient+Amphipolis+%C5%98ecko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Ancient+Amphipolis+%C5%98ecko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Ancient+Amphipolis+%C5%98ecko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section id="Bulharsko+%E2%86%92+Srbsko" class="section">
+            <h2>Bulharsko → Srbsko</h2>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 27</div>
+                        <h3>Promachonas / Kulata border crossing</h3>
+                        <p class="country">Řecko / Bulharsko · hraniční přechod</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: podle fronty</span><span>hraniční přechod</span></div>
+                <p><strong>Proč tam jet:</strong> Hranice Řecko–Bulharsko. Technický bod cesty zpět.</p>
+                <p class="note"><strong>Poznámka:</strong> Tady končí řecká část a začíná bulharská etapa.</p>
+                <div class="buttons"><a class="btn"
+                        href="https://mapy.cz/zakladni?q=Promachonas+%2F+Kulata+border+crossing+%C5%98ecko+%2F+Bulharsko"
+                        target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Promachonas+%2F+Kulata+border+crossing+%C5%98ecko+%2F+Bulharsko"
+                        target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                        href="https://www.google.com/search?q=Promachonas+%2F+Kulata+border+crossing+%C5%98ecko+%2F+Bulharsko"
+                        target="_blank" rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Promachonas+%2F+Kulata+border+crossing+%C5%98ecko+%2F+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a></div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 28</div>
+                        <h3>Sofia</h3>
+                        <p class="country">Bulharsko · hlavní město / kultura / jídlo</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: 2–5 h / nocleh podle plánu</span><span>hlavní město / kultura /
+                        jídlo</span></div>
+                <p><strong>Proč tam jet:</strong> Hlavní město Bulharska. Dobré na větší pauzu, jídlo a krátkou
+                    procházku centrem.</p>
+                <p class="note"><strong>Poznámka:</strong> Na krátký stop bych vybral centrum kolem Alexander Nevsky +
+                    Serdica + Vitosha Boulevard.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Sofia+Bulharsko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Sofia+Bulharsko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn" href="https://www.google.com/search?q=Sofia+Bulharsko"
+                        target="_blank" rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://www.visitsofia.bg/en/" target="_blank" rel="noopener">Oficiální 1</a><a
+                        class="btn official"
+                        href="https://www.visitsofia.bg/en/cityinfrastructure/what-to-see/temples/st-alexander-nevsky-cathedral"
+                        target="_blank" rel="noopener">Oficiální 2</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>St Alexander Nevsky Cathedral Sofia</strong><span>⭐⭐⭐ · 30–60 min
+                                · chrám / památka</span></div>
+                        <p>Nejznámější dominanta Sofie.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=St+Alexander+Nevsky+Cathedral+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=St+Alexander+Nevsky+Cathedral+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=St+Alexander+Nevsky+Cathedral+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=St+Alexander+Nevsky+Cathedral+Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Serdica Ancient Complex Sofia</strong><span>⭐⭐⭐ · 30–60 min ·
+                                archeologie</span></div>
+                        <p>Antické ruiny v centru města.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Serdica+Ancient+Complex+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Serdica+Ancient+Complex+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Serdica+Ancient+Complex+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Serdica+Ancient+Complex+Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Vitosha Boulevard Sofia</strong><span>⭐⭐ · 45–90 min · město /
+                                jídlo</span></div>
+                        <p>Hlavní pěší/bulvární zóna, jídlo, kavárny.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Vitosha+Boulevard+Sofia+Bulharsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Vitosha+Boulevard+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Vitosha+Boulevard+Sofia+Bulharsko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Vitosha+Boulevard+Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Ivan Vazov National Theatre Sofia</strong><span>⭐⭐ · 20–45 min ·
+                                architektura</span></div>
+                        <p>Hezká budova a park v centru.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Ivan+Vazov+National+Theatre+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Ivan+Vazov+National+Theatre+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Ivan+Vazov+National+Theatre+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Ivan+Vazov+National+Theatre+Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>National Palace of Culture Sofia</strong><span>⭐ · 20–45 min ·
+                                architektura</span></div>
+                        <p>Velká modernější dominanta Sofie.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=National+Palace+of+Culture+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=National+Palace+of+Culture+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=National+Palace+of+Culture+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=National+Palace+of+Culture+Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Sofia History Museum</strong><span>⭐⭐ · 1–2 h · muzeum</span>
+                        </div>
+                        <p>Muzeum v budově bývalých minerálních lázní.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Sofia+History+Museum+Bulharsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Sofia+History+Museum+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Sofia+History+Museum+Bulharsko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Sofia+History+Museum+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Boyana Church Sofia</strong><span>⭐⭐⭐ · 1–2 h + přesun · UNESCO /
+                                detour</span></div>
+                        <p>UNESCO památka kousek mimo centrum; dobré, když máte víc času.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Boyana+Church+Sofia+Bulharsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Boyana+Church+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Boyana+Church+Sofia+Bulharsko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Boyana+Church+Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Vitosha Mountain Sofia</strong><span>⭐⭐ · půlden · příroda /
+                                detour</span></div>
+                        <p>Hora nad městem; pěkné, ale spíš na delší zastávku.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Vitosha+Mountain+Sofia+Bulharsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Vitosha+Mountain+Sofia+Bulharsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Vitosha+Mountain+Sofia+Bulharsko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Vitosha+Mountain+Sofia+Bulharsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 29</div>
+                        <h3>Pirot</h3>
+                        <p class="country">Srbsko · bonus po cestě Sofia → Niš</p>
+                    </div>
+                    <div class="priority">⭐</div>
+                </div>
+                <div class="meta"><span>čas: 30–90 min</span><span>bonus po cestě Sofia → Niš</span></div>
+                <p><strong>Proč tam jet:</strong> Volitelné město mezi Sofií a Niší. Dává smysl, pokud chcete krátkou
+                    pauzu před návratem do Niše.</p>
+                <p class="note"><strong>Poznámka:</strong> Není ve vašem původním seznamu, ale leží prakticky po cestě.
+                </p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Pirot+Srbsko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Pirot+Srbsko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn" href="https://www.google.com/search?q=Pirot+Srbsko"
+                        target="_blank" rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Pirot+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a></div>
+                <div class="bonus">
+                    <h4>Další zajímavosti v okolí</h4>
+                    <div class="bonus-item">
+                        <div class="bonus-top"><strong>Pirot Fortress</strong><span>⭐⭐ · 30–60 min · pevnost</span>
+                        </div>
+                        <p>Pevnost ve městě, rychlá zastávka na protažení.</p>
+                        <div class="buttons small"><a class="btn"
+                                href="https://mapy.cz/zakladni?q=Pirot+Fortress+Srbsko" target="_blank"
+                                rel="noopener">Mapy.cz</a><a class="btn"
+                                href="https://www.google.com/search?tbm=isch&amp;q=Pirot+Fortress+Srbsko"
+                                target="_blank" rel="noopener">Obrázky</a><a class="btn"
+                                href="https://www.google.com/search?q=Pirot+Fortress+Srbsko" target="_blank"
+                                rel="noopener">Google</a><a class="btn"
+                                href="https://commons.wikimedia.org/w/index.php?search=Pirot+Fortress+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                                target="_blank" rel="noopener">Wikimedia</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="route-index">Bod 30</div>
+                        <h3>Niš</h3>
+                        <p class="country">Srbsko · nocleh / závěr dlouhého návratového dne</p>
+                    </div>
+                    <div class="priority">⭐⭐⭐</div>
+                </div>
+                <div class="meta"><span>čas: nocleh</span><span>nocleh / závěr dlouhého návratového dne</span></div>
+                <p><strong>Proč tam jet:</strong> Cíl návratového úseku. Praktické místo na přespání před poslední
+                    cestou domů.</p>
+                <p class="note"><strong>Poznámka:</strong> Pokud dorazíte brzo, můžete dohnat Niš Fortress nebo Skull
+                    Tower, pokud jste je nestihli cestou tam.</p>
+                <div class="buttons"><a class="btn" href="https://mapy.cz/zakladni?q=Ni%C5%A1+Srbsko" target="_blank"
+                        rel="noopener">Mapy.cz</a><a class="btn"
+                        href="https://www.google.com/search?tbm=isch&amp;q=Ni%C5%A1+Srbsko" target="_blank"
+                        rel="noopener">Obrázky</a><a class="btn" href="https://www.google.com/search?q=Ni%C5%A1+Srbsko"
+                        target="_blank" rel="noopener">Google</a><a class="btn"
+                        href="https://commons.wikimedia.org/w/index.php?search=Ni%C5%A1+Srbsko&amp;title=Special:MediaSearch&amp;type=image"
+                        target="_blank" rel="noopener">Wikimedia</a><a class="btn official"
+                        href="https://visitnis.org/en/" target="_blank" rel="noopener">Oficiální</a></div>
+            </article>
+        </section>
+        <footer>
+            <p>Soubor je dělaný jako plánovací sketch. Otevírací doby, parkování, ceny a provoz si před cestou
+                zkontrolujte, protože se mohou měnit podle sezóny.</p>
+        </footer>
+    </main>
+</body>
+
+</html>
